@@ -5,7 +5,7 @@ import {useMutation} from '@tanstack/react-query'
 import {z} from 'zod'
 import bcrypt from 'bcryptjs'
 import {useNavigate} from 'react-router-dom'
-import {PUBLIC_ROUTES} from '@/configs'
+import {DASHBOARD_ROUTES, PUBLIC_ROUTES, Roles} from '@/configs'
 
 const schema = z.object({
   email: z
@@ -64,7 +64,11 @@ export function useSignIn() {
           color: 'green',
           id: 'sign-in',
         })
-        navigate(PUBLIC_ROUTES.HOME)
+        navigate(
+          savedData.role_id === Roles.ADMIN
+            ? DASHBOARD_ROUTES.ROOT
+            : PUBLIC_ROUTES.HOME,
+        )
       } else {
         notifications.show({
           title: 'Error',

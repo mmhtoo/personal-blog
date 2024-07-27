@@ -6,3 +6,11 @@ export const AUTH_ROUTES = {
 export const PUBLIC_ROUTES = {
   HOME: '/',
 }
+
+export const DASHBOARD_ROUTES = {
+  ROOT: '/d',
+  BLOGS: '/d/blogs',
+  USERS: '/d/users',
+  WRITE_BLOG: '/d/blogs/write',
+  BLOG: '/d/blogs/:blogId',
+}
