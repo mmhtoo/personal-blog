@@ -15,12 +15,15 @@
     "@mantine/core": "^7.11.2",
     "@mantine/form": "^7.11.2",
     "@mantine/hooks": "^7.11.2",
+    "@supabase/supabase-js": "^2.44.4",
+    "bcryptjs": "^2.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.25.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
