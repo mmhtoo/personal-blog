@@ -1,10 +1,4 @@
 import {createBrowserRouter} from 'react-router-dom'
-import {authRoutes} from './routes/authRoutes'
-import {publicRoutes} from './routes/publicRoutes'
-import {dashboardRoutes} from './routes/dashboardRoutes'
+import {rootRoutes} from './routes/rootRoutes'
 
-export default createBrowserRouter([
-  ...authRoutes,
-  ...publicRoutes,
-  ...dashboardRoutes,
-])
+export default createBrowserRouter([...rootRoutes])

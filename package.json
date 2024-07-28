@@ -11,6 +11,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
+    "@blocknote/mantine": "^0.15.3",
+    "@blocknote/react": "^0.15.3",
     "@mantine/core": "^7.11.2",
     "@mantine/form": "^7.11.2",
     "@mantine/hooks": "^7.11.2",

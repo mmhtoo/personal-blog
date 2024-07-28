@@ -2,7 +2,6 @@ import {createAccount} from '@/apis/account'
 import {useForm, zodResolver} from '@mantine/form'
 import {useMutation} from '@tanstack/react-query'
 import {z} from 'zod'
-import bcrypt from 'bcryptjs'
 import {notifications} from '@mantine/notifications'
 import {useNavigate} from 'react-router-dom'
 import {AUTH_ROUTES} from '@/configs'
@@ -45,10 +44,7 @@ export function useSignUp() {
     if (isPending) {
       return
     }
-    const {error} = await mutateAsync({
-      ...formData,
-      password: bcrypt.hashSync(formData.password),
-    })
+    const {error} = await mutateAsync(formData)
     if (error) {
       if (error.code === '23505') {
         return notifications.show({

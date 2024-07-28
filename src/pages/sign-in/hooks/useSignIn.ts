@@ -1,11 +1,10 @@
-import {selectAccount} from '@/apis/account'
 import {useForm, zodResolver} from '@mantine/form'
 import {notifications} from '@mantine/notifications'
 import {useMutation} from '@tanstack/react-query'
 import {z} from 'zod'
-import bcrypt from 'bcryptjs'
 import {useNavigate} from 'react-router-dom'
 import {DASHBOARD_ROUTES, PUBLIC_ROUTES, Roles} from '@/configs'
+import {signInAccount} from '@/apis/account'
 
 const schema = z.object({
   email: z
@@ -28,55 +27,39 @@ export function useSignIn() {
 
   const {mutateAsync, isPending} = useMutation({
     mutationKey: ['sign-in'],
-    mutationFn: selectAccount,
+    mutationFn: signInAccount,
   })
 
   const navigate = useNavigate()
 
   const onSubmit = form.onSubmit(async (formData) => {
-    const {data, error} = await mutateAsync(formData.email)
+    const {data, error} = await mutateAsync(formData)
     if (error) {
       return notifications.show({
+        title: 'Error',
+        message:
+          error.message || 'Something went wrong, Please try again later!',
+        color: 'red',
+        id: 'sign-in',
+      })
+    } else if (data) {
+      notifications.show({
+        title: 'Success',
+        message: 'Successfully signed in!',
+        color: 'green',
+      })
+      navigate(
+        data.user.user_metadata.role_id === Roles.ADMIN
+          ? DASHBOARD_ROUTES.ROOT
+          : PUBLIC_ROUTES.HOME,
+      )
+    } else {
+      notifications.show({
         title: 'Error',
         message: 'Something went wrong, Please try again later!',
         color: 'red',
         id: 'sign-in',
       })
-    }
-    if (!data || data.length === 0) {
-      return notifications.show({
-        title: 'Error',
-        message: 'Bad Credentials!',
-        color: 'red',
-        id: 'sign-in',
-      })
-    }
-    const savedData = data[0]
-    if (savedData && bcrypt) {
-      const isSamePassword = bcrypt.compareSync(
-        formData.password,
-        savedData.password,
-      )
-      if (isSamePassword) {
-        notifications.show({
-          title: 'Success',
-          message: 'Successfully signed in!',
-          color: 'green',
-          id: 'sign-in',
-        })
-        navigate(
-          savedData.role_id === Roles.ADMIN
-            ? DASHBOARD_ROUTES.ROOT
-            : PUBLIC_ROUTES.HOME,
-        )
-      } else {
-        notifications.show({
-          title: 'Error',
-          message: 'Bad Credentials!',
-          color: 'red',
-          id: 'sign-in',
-        })
-      }
     }
   })
 
