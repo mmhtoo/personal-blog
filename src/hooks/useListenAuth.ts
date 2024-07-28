@@ -11,6 +11,7 @@ export function useListenAuth() {
   const dispatchSetUserInfos = useUserStore(setUserInfos)
 
   useEffect(() => {
+    // getUser from session and store in userStore
     supabase.auth.getUser().then(({error, data}) => {
       if (!error && data) {
         const user = data.user
@@ -36,6 +37,7 @@ export function useListenAuth() {
         }
       }
     })
+    // listen auth state and set up auto refreshing and stopping
     const {
       data: {subscription},
     } = supabase.auth.onAuthStateChange((event, session) => {

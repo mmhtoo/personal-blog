@@ -13,4 +13,5 @@ export const DASHBOARD_ROUTES = {
   USERS: '/d/users',
   WRITE_BLOG: '/d/blogs/write',
   BLOG: '/d/blogs/:blogId',
+  TRASH: '/d/trash',
 }
