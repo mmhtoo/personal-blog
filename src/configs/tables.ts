@@ -1,6 +1,7 @@
 export const TABLES = {
   ROLES: 'roles',
   ACCOUNTS: 'accounts',
+  BLOGS: 'blogs',
 }
 
 export enum Roles {
