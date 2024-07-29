@@ -21,6 +21,8 @@
     "@tabler/icons-react": "^3.11.0",
     "@tanstack/react-query": "^5.51.15",
     "bcryptjs": "^2.4.3",
+    "dayjs": "^1.11.12",
+    "mantine-datatable": "^7.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.25.1",
